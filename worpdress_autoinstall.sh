@@ -20,6 +20,7 @@ function installWordpress(){
     curl https://uk.wordpress.org/latest-uk.tar.gz > wordpress.tar.gz
     tar xzf wordpress.tar.gz
     rsync -avP wordpress/ /var/www/html/
+    sudo mysql -u root -e "CREATE DATABASE wordpress"
 }
 read -p "Do you want to install Wordpress? " answer
 if [[ "$answer" == "y" ]]; then
