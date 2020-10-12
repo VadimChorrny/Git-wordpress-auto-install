@@ -1,10 +1,5 @@
+#!/bin/bash
 function installWordpress(){
-    echo "NAME OF DB "
-    read -e namedb
-    echo "USER OF DB "
-    read -e userdb
-    echo "PASS OF DB "
-    read -s passdb
     sudo yum -y update httpd
     sudo yum -y install httpd
     sudo firewall-cmd --permanent --add-service=http
@@ -21,7 +16,7 @@ function installWordpress(){
     yum install php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysql -y
     yum -y install phpmyadmin
     yum -y install rsync
-    cd /var/www
+    cd /var/www/ || exit
     curl https://uk.wordpress.org/latest-uk.tar.gz > wordpress.tar.gz
     tar xzf wordpress.tar.gz
     rsync -avP wordpress/ /var/www/html/
@@ -31,3 +26,4 @@ if [[ "$answer" == "y" ]]; then
     installWordpress;
 elif [[ "$answer" == "n" ]]; then
     exit
+fi
